@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace先随意写⼀个-->
+<mapper namespace="car">
+    <!--insert sql：保存⼀个汽⻋信息-->
+    <insert id="insertCar">
+        insert into t_car
+        (id,car_num,brand,guide_orice,product_time,cartype)
+        values
+        (null,'105','丰⽥',40.30,'2014-10-05','氢能源')
+    </insert>
+</mapper>
