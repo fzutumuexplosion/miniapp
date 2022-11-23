@@ -39,8 +39,30 @@
   </el-dialog>
 </template>
 <script setup>
-import { defineEmits, ref } from 'vue'
-import { getPicture } from '@/api/picture.js'
+import { defineEmits, ref, defineProps } from 'vue'
+import { addPicture } from '@/api/picture.js'
+import { ElMessage } from 'element-plus'
+import i18n from '@/i18n'
+const formRef = ref(null)
+const form = ref({
+  position: '',
+  path: '',
+  name: ''
+})
+const props = defineProps({
+  dialogTitle: {
+    type: String,
+    default: '',
+    required: true
+  },
+  dialogTableVal: {
+    type: Object,
+    // default: {} 此处会报错 因为vue规定，对象或数组默认值必须从一个工厂函数获取
+    default: function () {
+      return {}
+    }
+  }
+})
 const queryForm = ref({
   // 数据库定义的名字
   position: '',
@@ -50,7 +72,7 @@ const queryForm = ref({
 })
 const PositionData = ref([])
 const initGetPicture = async () => {
-  const res = await getPicture(queryForm.value)
+  const res = await addPicture(queryForm.value)
   console.log(res)
   PositionData.value = res.records
 }
@@ -62,7 +84,22 @@ const handleClose = () => {
 }
 // 添加确认
 const handleConfirm = () => {
-    handleClose()
+  console.log(form.value)
+  // 表单统一验证
+  formRef.value.validate(async (valid) => {
+    if (valid) {
+      if (props.dialogTitle === '添加班级') {
+        await addPicture(form.value)
+        ElMessage({
+          message: i18n.global.t('message.addSuccess'),
+          type: 'success'
+        })
+      } else {
+      console.log('error submit!!')
+      return false
+    }
+  }
+})
 }
 </script>
 
