@@ -7,4 +7,5 @@ public class cwq_test{
       // 下面的语句将创建一个Puppy对象
       Puppy myPuppy = new Puppy( "tommy" );
    }*/
+   //System.out.println("小狗的名字是 : " + "abc" );
 }
