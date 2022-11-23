@@ -3,22 +3,11 @@ import request from './request'
 
 export const getUser = (params) => {
   return request({
-    url: '/users/1/5',
+    url: '/users/:current/:size',
     method: 'GET',
-    // headers: {
-    //   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    // },
-    // data: decodeURI(params)
     params
   })
 }
-
-// export const getUserState = (uId, type) => {
-//   return request({
-//     url: `users/${uId}/state/${type}`,
-//     method: 'PUT'
-//   })
-// }
 
 // 添加用户
 export const addUser = (data) => {
@@ -29,11 +18,10 @@ export const addUser = (data) => {
   })
 }
 
-export const editUser = (data) => {
+export const editUser = (id) => {
   return request({
-    url: '/users/2',
-    method: 'put',
-    data
+    url: `users/${id}`,
+    method: 'put'
   })
 }
 
