@@ -4,22 +4,32 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import java.io.InputStream;
-/**
- * MyBatis⼊⻔程序
- * @author ⽼杜
- * @since 1.0
- * @version 1.0
- */
-public class Main {
-    public static void main(String[] args) throws Exception{
-        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-        InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
-        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        int count = sqlSession.insert("insertCar"); //返回值是数据库中受影响的记录条数
-        System.out.println("插入了"+count+"条数据");
-        sqlSession.commit();
 
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        SqlSession sqlSession = null;
+        try {
+            SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+            SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream("mybatis-config.xml"));
+            sqlSession = sqlSessionFactory.openSession();
+            // 以下开始运行sql文件
+            int count = sqlSession.insert("insertClass");
+            sqlSession.insert("insertMessage");
+            sqlSession.insert("insertUser");
+            System.out.println("插入了"+count+"条元素");
+            sqlSession.commit();
+        }catch (Exception e){
+            if(sqlSession!=null) {
+                sqlSession.rollback();
+            }
+            e.printStackTrace();
+        }
+        finally {
+            if(sqlSession!=null){
+                sqlSession.close();
+            }
+        }
     }
 }
