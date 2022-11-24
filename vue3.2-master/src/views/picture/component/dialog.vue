@@ -39,6 +39,7 @@
   </el-dialog>
 </template>
 <script setup>
+
 import { defineEmits, ref, defineProps } from 'vue'
 import { addPicture } from '@/api/picture.js'
 import { ElMessage } from 'element-plus'
@@ -72,7 +73,9 @@ const queryForm = ref({
 })
 const PositionData = ref([])
 const initGetPicture = async () => {
+
   const res = await addPicture(queryForm.value)
+
   console.log(res)
   PositionData.value = res.records
 }
@@ -84,6 +87,7 @@ const handleClose = () => {
 }
 // 添加确认
 const handleConfirm = () => {
+
   console.log(form.value)
   // 表单统一验证
   formRef.value.validate(async (valid) => {
@@ -100,6 +104,7 @@ const handleConfirm = () => {
     }
   }
 })
+
 }
 </script>
 

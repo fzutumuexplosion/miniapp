@@ -28,6 +28,13 @@ public class FriendsController {
     @Autowired
     private UserService userService;
 
+//    //检查token
+//    @GetMapping("check")
+//    public R check(@RequestHeader("Authorization") String token){
+//        return new R(true,token,"token");
+//    }
+
+
     //查看班级
     @GetMapping("{current}/{size}")
     public R getAll(@PathVariable Integer current, @PathVariable Integer size, Classs classs){
