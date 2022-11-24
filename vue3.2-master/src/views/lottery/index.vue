@@ -113,13 +113,17 @@
 <script setup>
 // 搜素图标
 import { Search, ChatLineSquare, Delete, Edit } from '@element-plus/icons-vue'
-import { getLottery, delAllLottery } from '@/api/lottery.js'
+
+import { getLottery, delAllLottery, deleteLottery } from '@/api/lottery.js'
+
 import { ref } from 'vue'
 // 导入用户数据
 import { options } from './options'
 // 消息提示，如添加成功之类
 import { ElMessage, ElMessageBox, ElTable } from 'element-plus'
-// import { useI18n } from 'vue-i18n'
+
+import { useI18n } from 'vue-i18n'
+
 // 导入弹窗框
 import Dialog from './component/dialog.vue'
 import router from '@/router'
@@ -133,7 +137,9 @@ const handleChoice = () => {
 const indexMethod = (index) => {
   return index + 1
 }
-// const i18n = useI18n()
+
+const i18n = useI18n()
+
 const queryForm = ref({
   // 当前页
   current: 1,
@@ -235,28 +241,30 @@ const deleteAllLottery = () => {
     })
 }
 // 删除一行
-// const delLottery = (row) => {
-//   ElMessageBox.confirm(i18n.t('dialog.deleteTitle'), 'Warning', {
-//     confirmButtonText: '确定',
-//     cancelButtonText: '取消',
-//     type: 'warning'
-//   })
-//     .then(async () => {
-//       await deleteLottery(row.id)
-//       console.log(row.id)
-//       ElMessage({
-//         type: 'success',
-//         message: '删除成功'
-//       })
-//       initGetLotteryList()
-//     })
-//     .catch(() => {
-//       ElMessage({
-//         type: 'info',
-//         message: '取消删除'
-//       })
-//     })
-// }
+
+const delLottery = (row) => {
+  ElMessageBox.confirm(i18n.t('dialog.deleteTitle'), 'Warning', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(async () => {
+      await deleteLottery(row.id)
+      console.log(row.id)
+      ElMessage({
+        type: 'success',
+        message: '删除成功'
+      })
+      initGetLotteryList()
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消删除'
+      })
+    })
+}
+
 // 取消显示多选
 const handleClose = () => {
   Visible.value = true

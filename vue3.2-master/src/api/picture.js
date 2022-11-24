@@ -8,14 +8,14 @@ export const getPicture = (params) => {
   })
 }
 
-// // 添加用户
-// export const addUser = (data) => {
-//   return request({
-//     url: 'users',
-//     method: 'post',
-//     data
-//   })
-// }
+// 添加用户
+export const addPicture = (data) => {
+  return request({
+    url: '/picture',
+    method: 'post',
+    data
+  })
+}
 
 // export const editUser = (data) => {
 //   return request({
