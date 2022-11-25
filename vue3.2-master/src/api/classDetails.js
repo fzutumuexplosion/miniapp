@@ -3,7 +3,7 @@ import request from './request'
 
 export const getClassDetails = (params) => {
   return request({
-    url: '/classDetails/1/5',
+    url: '/class/86/1/5',
     method: 'GET',
     params
   })
