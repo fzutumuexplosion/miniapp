@@ -75,7 +75,7 @@
             type="primary"
             size="small"
             :icon="ChatLineSquare"
-            @click="handleClass()"
+            @click="handleClass(row)"
           >查看详细</el-button>
           <el-button
             type="danger"
@@ -190,8 +190,9 @@ const handleDialogValue = (row) => {
   dialogVisible.value = true
 }
 
-const handleClass = () => {
-  router.replace('/classdetails')
+const handleClass = (row) => {
+  // console.log(row.id)
+  router.push({ name: 'classdetails', params: { id: row.id } })
 }
 // 删除一行
 const delClass = (row) => {

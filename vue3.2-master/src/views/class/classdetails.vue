@@ -1,4 +1,5 @@
 <template>
+    <!-- <span>{{ $route.params.id }}</span> -->
     <el-card>
       <!-- gutter间距 -->
       <el-row :gutter="20" class="header">
@@ -91,6 +92,21 @@
   // import { useI18n } from 'vue-i18n'
   // import isNull from '@/util/filters'
   import router from '@/router'
+  const id = ref()
+  // 得到用户数据
+  const initGetClassDetailsList = async () => {
+    id.value = router.currentRoute.value.params.id
+    // console.log(1234)
+    const res = await getClassDetails(id)
+    console.log(res)
+    // total.value = res.total
+    // size.value = res.size
+    // console.log(res.size)
+    // tableData.value = res.records
+    // console.log(res.records)
+  }
+  // console.log(router.currentRoute.value.params.id)
+  initGetClassDetailsList()
   const indexMethod = (index) => {
     return index + 1
   }
@@ -106,19 +122,6 @@
   })
   const total = ref(0)
   const tableData = ref([])
-
-  // 得到用户数据
-  const initGetClassDetailsList = async () => {
-    const res = await getClassDetails(queryForm.value)
-    // console.log(res)
-    total.value = res.total
-    // size.value = res.size
-    // console.log(res.size)
-    tableData.value = res.records
-    // console.log(res.records)
-  }
-  initGetClassDetailsList()
-
   // 页码改变
   const handleSizeChange = (Size) => {
     queryForm.value.current = 1
@@ -138,8 +141,9 @@
       type: 'warning'
     })
       .then(async () => {
-        await deleteClassDetails(row.id)
-        console.log(row.id)
+        // console.log(row)
+        await deleteClassDetails(row.openId)
+        console.log(row.openId)
         ElMessage({
           type: 'success',
           message: '删除成功'
