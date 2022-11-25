@@ -40,7 +40,7 @@
           v-for="(item, index) in options2"
           :width="item.width"
           :prop="item.prop"
-          :label="$t(`table.${item.label}`)"
+          :label="item.label"
           :key="index"
           align="center"
         >
@@ -98,12 +98,14 @@
     id.value = router.currentRoute.value.params.id
     // console.log(1234)
     const res = await getClassDetails(id)
-    console.log(res)
-    // total.value = res.total
+
+    // console.log(res)
+    total.value = res.total
     // size.value = res.size
     // console.log(res.size)
-    // tableData.value = res.records
-    // console.log(res.records)
+    tableData.value = res.records
+    console.log(res.records)
+
   }
   // console.log(router.currentRoute.value.params.id)
   initGetClassDetailsList()

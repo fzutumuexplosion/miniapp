@@ -39,7 +39,7 @@
       <el-button type="primary" @click="handleDialogValue()">添加班级</el-button>
     </el-row>
 
-    <el-table :data="tableData" stripe style="width: 100%">
+    <el-table :data="tableData.slice((queryForm.current - 1)*queryForm.size,queryForm.current*queryForm.size)" stripe style="width: 100%">
       <!-- 用户数据 -->
       <!-- 序号 -->
       <el-table-column type="index" label="序号" width="100" align="center" :index="indexMethod" />
@@ -92,8 +92,7 @@
       v-model:currentPage="queryForm.current"
       :page-size="queryForm.size"
       layout="prev, pager, next, jumper"
-      :total="total"
-      @size-change="handleSizeChange"
+      :total="tableData.length"
       @current-change="handleCurrentChange"
       @initUserList="initGetClassList"
     />
@@ -137,7 +136,7 @@ const queryForm = ref({
   // 当前页
   current: 1,
   // 每页显示条数
-  size: 5
+  size: 3
 })
 const total = ref(0)
 const tableData = ref([])
@@ -157,13 +156,6 @@ const initGetClassList = async () => {
   // console.log(res.records)
 }
 initGetClassList()
-
-// 页码改变
-const handleSizeChange = (Size) => {
-  queryForm.value.current = 1
-  queryForm.value.size = Size
-  initGetClassList()
-}
 
 const handleCurrentChange = (Current) => {
   queryForm.value.current = Current
@@ -191,7 +183,9 @@ const handleDialogValue = (row) => {
 }
 
 const handleClass = (row) => {
-  // console.log(row.id)
+
+  console.log(row.id)
+
   router.push({ name: 'classdetails', params: { id: row.id } })
 }
 // 删除一行
