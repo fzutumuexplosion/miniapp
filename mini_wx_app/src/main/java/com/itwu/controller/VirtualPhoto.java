@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 
 import static com.itwu.utils.ImageUtil.multipartFileToBASE64;
@@ -28,7 +29,7 @@ public class VirtualPhoto {
     }
 
     @PostMapping("/cut")
-    public R cut(@RequestParam(value = "file") MultipartFile file){
+    public R cut(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file){
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_seg";
         try {
@@ -37,17 +38,25 @@ public class VirtualPhoto {
             String param = "image=" + imgParam;
             //获取token
             String accessToken = AuthorService.getAuth();
-                System.out.println(accessToken);
+                //System.out.println(accessToken);
             //获取信息
             String result = HttpUtil.post(url, accessToken, param);
             JSONObject jsonObject = JSONObject.parseObject(result);
-                System.out.println(result);
+                //System.out.println(result);
             //取出人像
             String img=jsonObject.getString("foreground");
-                System.out.println(img);
+                //System.out.println(img);
+            //获取协议号
+            String basePath = request.getScheme()
+                    + "://"
+                    + request.getServerName()//获取IP地址
+                    + ":"
+                    + request.getServerPort()//获取端口号
+                    + request.getContextPath();//获取工程路径
+
             //base64转为图片
             ToImgUtil toImgUtil=new ToImgUtil();
-            ToImgUtil toImgUtil1= toImgUtil.ToImg(img);
+            ToImgUtil toImgUtil1= toImgUtil.ToImg(img,basePath);
 
                 System.out.println(toImgUtil1.getBase());
 

@@ -1,5 +1,6 @@
 package com.itwu.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import sun.misc.BASE64Decoder;
 
 import java.io.ByteArrayInputStream;
@@ -11,6 +12,12 @@ import java.util.Date;
 
 public class ToImgUtil {
     private String base;
+
+    //配置图片保存的路径
+    private String folder ="/human/img";
+
+    //配置图片反射
+    private String uploadPath ="/img/";
 
     public ToImgUtil() {
     }
@@ -36,13 +43,13 @@ public class ToImgUtil {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddHHmmssSSS");
         return fmt.format(new Date());
     }
-    public ToImgUtil ToImg(String base){
+    public ToImgUtil ToImg(String base,String basePath){
         //获取年月日
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         //将年、月、日存入数组
         String[] time = sdf.format(new Date()).split("-");
         // 文件保存地址 默认地址为xxxx/年/月/日
-        String destDir = "C:"+File.separator+time[0]+File.separator+time[1]+File.separator+time[2];;
+        String destDir = folder;
         /* response.setHeader("Access-Control-Allow-Origin", "*");
          response.setHeader("Access-Control-Allow-Methods", "POST");*/
         base=base.replaceAll("data:image/png;base64,","");
@@ -67,7 +74,7 @@ public class ToImgUtil {
                 }
                 //文件新名称
                 String fileNameNew = getFileNameNew() + ".png";
-                File f = new File(destfile.getAbsoluteFile() + File.separator + fileNameNew);
+                File f = new File(destDir + File.separator + fileNameNew);
                 // 将字符串转换成二进制，用于显示图片
                 // 将上面生成的图片格式字符串 imgStr，还原成图片显示
                 InputStream in = new ByteArrayInputStream(imageByte);
@@ -84,7 +91,10 @@ public class ToImgUtil {
                 fos.flush();
                 fos.close();
                 in.close();
-                return new ToImgUtil("图片地址："+destDir+",图片名称"+fileNameNew);
+                //加入服务器地址端口号
+                destDir=basePath+destDir;
+                String url =basePath+uploadPath;
+                return new ToImgUtil("图片地址："+url+",图片名称"+fileNameNew);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
