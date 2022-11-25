@@ -19,5 +19,8 @@
         <mapper resource="ClassMapper.xml"/>
         <mapper resource="UserMapper.xml"/>
         <mapper resource="MessageMapper.xml"/>
+        <mapper resource="VideoMapper.xml"/>
+        <mapper resource="MessageRecordMapper.xml"/>
+        <mapper resource="anniversary_scheduleMapper.xml"/>
     </mappers>
 </configuration>
