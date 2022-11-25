@@ -98,12 +98,14 @@
     id.value = router.currentRoute.value.params.id
     // console.log(1234)
     const res = await getClassDetails(id)
+
     // console.log(res)
     total.value = res.total
     // size.value = res.size
     // console.log(res.size)
     tableData.value = res.records
     console.log(res.records)
+
   }
   // console.log(router.currentRoute.value.params.id)
   initGetClassDetailsList()

@@ -183,7 +183,9 @@ const handleDialogValue = (row) => {
 }
 
 const handleClass = (row) => {
+
   console.log(row.id)
+
   router.push({ name: 'classdetails', params: { id: row.id } })
 }
 // 删除一行

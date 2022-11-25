@@ -27,7 +27,7 @@ export default {
     wxUnionId: 'wx_union_id',
     studentName: '姓名',
     studentNum: '学号',
-    classNum: '班级号',
+    classNum: '班级ID',
     // 添加班级
     grade: '年级',
     profession: '专业',
