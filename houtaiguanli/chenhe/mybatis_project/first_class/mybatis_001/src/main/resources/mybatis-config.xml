@@ -8,7 +8,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_liarning"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_warehouse"/>
                 <property name="username" value="root"/>
                 <property name="password" value="082000403"/>
             </dataSource>
@@ -16,7 +16,11 @@
     </environments>
     <mappers>
         <!--sql映射⽂件创建好之后，需要将该⽂件路径配置到这⾥-->
-        <mapper resource="CarMapper.xml"/>
-        <mapper resource="student.xml"/>
+        <mapper resource="ClassMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
+        <mapper resource="MessageMapper.xml"/>
+        <mapper resource="VideoMapper.xml"/>
+        <mapper resource="MessageRecordMapper.xml"/>
+        <mapper resource="anniversary_scheduleMapper.xml"/>
     </mappers>
 </configuration>

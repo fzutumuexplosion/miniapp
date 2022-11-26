@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace先随意写⼀个-->
+<mapper namespace="anniversary_scheduleMapper">
+    <insert id="insertanniversary_schedule">
+        insert into anniversary_schedule
+        values("2022-10-10-13:20","校庆日程","几点到几点有什么活动，干嘛干嘛")
+    </insert>
+</mapper>
