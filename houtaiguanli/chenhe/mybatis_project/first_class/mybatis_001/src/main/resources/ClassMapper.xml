@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace先随意写⼀个-->
+<mapper namespace="Class">
+    <!--insert sql：保存⼀个汽⻋信息-->
+    <insert id="insertClass">
+        insert into Class(Class_id,Class_grade,Class_speciality,Class_number)
+        values("032004001","2020","数据科学与大数据技术","01")
+    </insert>
+</mapper>

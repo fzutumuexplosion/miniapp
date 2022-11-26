@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_warehouse"/>
+                <property name="username" value="root"/>
+                <property name="password" value="082000403"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--sql映射⽂件创建好之后，需要将该⽂件路径配置到这⾥-->
+        <mapper resource="ClassMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
+        <mapper resource="MessageMapper.xml"/>
+        <mapper resource="VideoMapper.xml"/>
+        <mapper resource="MessageRecordMapper.xml"/>
+        <mapper resource="anniversary_scheduleMapper.xml"/>
+    </mappers>
+</configuration>
